@@ -1,0 +1,47 @@
+name: Validate Issue Templates
+
+# Validate the GitHub Issue Forms templates and the template chooser
+# configuration whenever a pull request changes anything under
+# .github/ISSUE_TEMPLATE/.
+#
+# The job runs scripts/validate-templates.ts, which exits with a non-zero
+# status when any template or contact link is invalid. A failing job marks the
+# required status check as failed, so branch protection blocks the pull request
+# from being merged until the validation errors are resolved (Requirement 6.5).
+
+on:
+  pull_request:
+    # Only run when the issue templates themselves change (Requirement 6.5).
+    paths:
+      - ".github/ISSUE_TEMPLATE/**"
+
+# Read-only permissions: the validation job only needs to check out the
+# repository and inspect files. It never mutates repository state.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate-templates:
+    name: Validate issue templates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate issue templates and chooser configuration
+        # Exits non-zero on any validation error, failing the job and blocking
+        # the merge via the required status check (Requirement 6.5).
+        run: npx ts-node scripts/validate-templates.ts

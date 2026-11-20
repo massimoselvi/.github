@@ -1,0 +1,176 @@
+# Canonical organization label definitions
+#
+# Each label entry has:
+#   name        (required) - the canonical label name
+#   color       (required) - a 6-character hex color WITHOUT the leading '#'
+#                            (must match ^[0-9a-fA-F]{6}$). Always quoted so YAML
+#                            treats it as a string (e.g. "008672", "5319e7").
+#   description (required) - a short human-readable description
+#   aliases     (optional) - previous names to rename from (max 10 per label),
+#                            matched case-insensitively during sync
+#
+# Rules enforced by scripts/validate-labels.ts:
+#   - No two labels may share the same name (case-insensitive).
+#   - No alias may collide with another label's name or alias (case-insensitive).
+#   - color must match ^[0-9a-fA-F]{6}$.
+#   - A label may have at most 10 aliases.
+
+# --- Issue type ---------------------------------------------------------------
+
+- name: bug
+  color: "d73a4a"
+  description: Something isn't working as expected
+  aliases:
+    - defect
+    - error
+    - broken
+
+- name: feature
+  color: "0e8a16"
+  description: A new capability or functionality request
+  aliases:
+    - feature-request
+    - new-feature
+
+- name: enhancement
+  color: "a2eeef"
+  description: An improvement to existing functionality
+  aliases:
+    - improvement
+
+- name: documentation
+  color: "0075ca"
+  description: Improvements or additions to documentation
+  aliases:
+    - docs
+    - doc
+
+- name: question
+  color: "d876e3"
+  description: Further information is requested
+  aliases:
+    - support
+    - help
+
+- name: performance
+  color: "fbca04"
+  description: Related to speed, memory, or resource usage
+  aliases:
+    - perf
+    - optimization
+
+- name: refactor
+  color: "fef2c0"
+  description: Code change that neither fixes a bug nor adds a feature
+  aliases:
+    - cleanup
+    - tech-debt
+
+- name: test
+  color: "c5def5"
+  description: Adding or improving tests
+  aliases:
+    - tests
+    - testing
+
+# --- Workflow / triage --------------------------------------------------------
+
+- name: triage
+  color: "ededed"
+  description: Needs initial review and categorization
+  aliases:
+    - needs-triage
+    - untriaged
+
+- name: needs-info
+  color: "e99695"
+  description: Blocked pending more information from the reporter
+  aliases:
+    - more-info-needed
+    - awaiting-response
+
+- name: blocked
+  color: "b60205"
+  description: Progress is blocked by an external dependency
+  aliases:
+    - on-hold
+
+- name: in-progress
+  color: "1d76db"
+  description: Work is actively underway
+  aliases:
+    - wip
+    - in-development
+
+- name: ready-for-review
+  color: "0e8a16"
+  description: Ready to be reviewed by a maintainer
+  aliases:
+    - needs-review
+
+# --- Resolution ---------------------------------------------------------------
+
+- name: wontfix
+  color: "ffffff"
+  description: This will not be worked on
+  aliases:
+    - wont-fix
+    - no-fix
+
+- name: duplicate
+  color: "cfd3d7"
+  description: This issue or pull request already exists
+  aliases:
+    - dupe
+
+- name: invalid
+  color: "e4e669"
+  description: This doesn't seem right or is not actionable
+  aliases:
+    - not-valid
+
+# --- Contribution -------------------------------------------------------------
+
+- name: good first issue
+  color: "7057ff"
+  description: Good for newcomers to the project
+  aliases:
+    - beginner-friendly
+    - starter
+    - easy
+
+- name: help wanted
+  color: "008672"
+  description: Extra attention or community help is wanted
+  aliases:
+    - help-wanted
+    - contributions-welcome
+
+# --- Maintenance --------------------------------------------------------------
+
+- name: dependencies
+  color: "0366d6"
+  description: Changes to project dependencies
+  aliases:
+    - deps
+    - dependency
+
+- name: security
+  color: "ee0701"
+  description: Security-related issue or vulnerability
+  aliases:
+    - vulnerability
+    - cve
+
+- name: breaking-change
+  color: "b60205"
+  description: Introduces a backwards-incompatible change
+  aliases:
+    - breaking
+
+- name: ci
+  color: "5319e7"
+  description: Continuous integration and automation changes
+  aliases:
+    - build
+    - automation

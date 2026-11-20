@@ -1,0 +1,58 @@
+name: Label Sync
+
+# Synchronize the canonical label set declared in .github/labels.yml to every
+# non-archived repository in the organization.
+#
+# Runs daily on a schedule and can be triggered manually from the Actions tab.
+# The job uses minimal permissions (issues: write) because label operations go
+# exclusively through the issues API namespace.
+#
+# Authentication: the default GITHUB_TOKEN is scoped to this repository only and
+# cannot write labels to other org repositories. A fine-grained PAT or GitHub
+# App token with "issues: write" across the organization must be stored as the
+# ORG_LABEL_SYNC_TOKEN secret. No token is ever hardcoded.
+
+on:
+  schedule:
+    # Daily at 03:00 UTC (Requirement 13.2: at least once per day).
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+# Minimal permissions (Requirement 15.4). Label mutations only need the issues
+# scope; contents: read lets the job check out this repository to read
+# labels.yml and run the sync script.
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  sync-labels:
+    name: Sync organization labels
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Synchronize labels to all non-archived org repositories
+        run: npx ts-node scripts/sync-labels.ts
+        env:
+          # Org-scoped token with issues: write. Reference secrets only via the
+          # secrets context — never hardcode a token value (Requirement 15.4).
+          GITHUB_TOKEN: ${{ secrets.ORG_LABEL_SYNC_TOKEN }}
+          # Target every non-archived repository in this repository's owning
+          # organization (Requirements 13.7, 11.2). The sync script resolves the
+          # repository list and filters out archived repos.
+          GITHUB_ORG: ${{ github.repository_owner }}

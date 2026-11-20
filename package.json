@@ -2,20 +2,24 @@
   "name": "github-org-management",
   "version": "1.0.0",
   "private": true,
-  "description": "Validation and label-sync tooling for the organization .github repository",
+  "description": "Validation and sync scripts for the organization .github repository",
+  "license": "MIT",
   "type": "commonjs",
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "build": "tsc"
+    "build": "tsc",
+    "validate": "ts-node scripts/validate-all.ts",
+    "test": "node --require ts-node/register --test scripts/__tests__/*.property.test.ts"
   },
   "dependencies": {
-    "@octokit/rest": "^21.0.2",
-    "js-yaml": "^4.1.0"
+    "@octokit/rest": "22.0.1",
+    "js-yaml": "4.3.2"
   },
   "devDependencies": {
-    "@types/js-yaml": "^4.0.9",
-    "@types/node": "^22.10.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.7.2"
+    "@types/js-yaml": "4.0.9",
+    "@types/node": "22.10.5",
+    "fast-check": "3.23.2",
+    "ts-node": "10.9.2",
+    "typescript": "5.7.3"
   }
 }

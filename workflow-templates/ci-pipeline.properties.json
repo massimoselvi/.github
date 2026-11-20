@@ -1,0 +1,15 @@
+{
+  "name": "ci-pipeline",
+  "description": "Standard organization CI pipeline that runs lint, test, and build jobs for Node.js projects on pushes and pull requests.",
+  "iconName": "rocket",
+  "categories": [
+    "Continuous integration",
+    "JavaScript",
+    "TypeScript"
+  ],
+  "filePatterns": [
+    "package\\.json$",
+    "package-lock\\.json$",
+    "tsconfig.*\\.json$"
+  ]
+}

@@ -1,0 +1,14 @@
+# Issue template chooser configuration
+# Disables blank issues so contributors must pick a template or an
+# external contact link below.
+blank_issues_enabled: false
+contact_links:
+  - name: Questions & Discussions
+    url: https://github.com/orgs/massimoselvi/discussions
+    about: Ask questions, share ideas, or get general help from the community in GitHub Discussions instead of opening an issue.
+  - name: Report a Security Vulnerability
+    url: https://github.com/massimoselvi/.github/security/advisories/new
+    about: Privately disclose a security vulnerability through GitHub Security Advisories. Please do not open a public issue.
+  - name: Email Support
+    url: https://massimoselvi.com
+    about: For questions that do not fit a public channel, reach out to the maintainers at support@massimoselvi.com.

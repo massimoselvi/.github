@@ -1,0 +1,7 @@
+{
+  "name": "security-scan",
+  "description": "Dependency review, CodeQL code scanning, and vulnerability audit for organization repositories.",
+  "iconName": "shield-check",
+  "categories": ["Security", "Code scanning"],
+  "filePatterns": ["package.json$", "package-lock.json$", ".*\\.ya?ml$"]
+}

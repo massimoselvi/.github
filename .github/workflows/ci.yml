@@ -1,0 +1,49 @@
+name: CI
+
+# Continuous integration for the organization .github repository itself.
+#
+# Runs the unified validation suite (scripts/validate-all.ts via the "validate"
+# npm script) on every push and pull request. The unified runner validates the
+# label definitions, issue templates, funding configuration, and workflow
+# templates in a single pass and exits non-zero on any failure.
+#
+# On a pull request a failing job marks this required status check as failed, so
+# branch protection blocks the merge until every template and configuration file
+# passes validation (Requirements 6.5, 15.1).
+
+on:
+  push:
+  pull_request:
+
+# Read-only permissions (Requirement 15.4): the validation job only checks out
+# the repository and inspects files. It never mutates repository state and
+# references no secrets.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate templates and configuration
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unified validation
+        # "npm run validate" executes ts-node scripts/validate-all.ts, which
+        # exits non-zero on any validation error, failing the job and blocking
+        # the merge via the required status check (Requirements 6.5, 15.1).
+        run: npm run validate

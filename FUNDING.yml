@@ -1,0 +1,21 @@
+# Funding configuration for the organization.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+#
+# Replace the placeholder values below with your real accounts/URLs.
+# Rules enforced by the org funding validator:
+#   - At least one funding platform must be specified.
+#   - All URLs must use the HTTPS protocol.
+#   - GitHub Sponsors usernames are limited to a maximum of 4.
+#   - Up to 4 custom URL platforms are supported.
+
+# GitHub Sponsors: up to 4 publicly accessible GitHub usernames.
+github: [your-org]
+
+# Open Collective: the slug of your Open Collective account.
+open_collective: your-org
+
+# Ko-fi: your Ko-fi username.
+ko_fi: your-org
+
+# Custom URLs: up to 4 HTTPS donation links.
+custom: ["https://example.com/donate"]

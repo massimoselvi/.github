@@ -1,59 +1,122 @@
-# Contributing Guidelines
+# Contributing
 
-Thank you for your interest in contributing to our project. Whether it's a bug report, new feature, correction, or additional
-documentation, we greatly value feedback and contributions from our community.
+Thanks for your interest in contributing. Whether you are reporting a bug,
+proposing a feature, fixing a typo, or improving documentation, your help is
+welcome and appreciated.
 
-Please read through this document before submitting any issues or pull requests to ensure we have all the necessary
-information to effectively respond to your bug report or contribution.
+This guide documents how we work: branch naming, commit message format, and
+what we expect from a pull request. Following it keeps our history readable and
+our review process fast.
 
+## Before You Start
 
-## Security issue notifications
-If you discover a potential security issue in this project we ask that you notify AWS/Amazon Security via our [vulnerability reporting page](http://aws.amazon.com/security/vulnerability-reporting/). Please do **not** create a public GitHub issue.
+- Search existing [issues](https://github.com/Cell-V/.github/issues)
+  and pull requests to avoid duplicating work already in progress.
+- For anything beyond a small fix, open an issue first so we can agree on the
+  approach before you invest time in it.
+- Be kind and constructive. All participation is governed by our
+  [Code of Conduct](./CODE_OF_CONDUCT.md).
 
+## Branch Naming
 
-## Reporting Bugs/Feature Requests
+Create a dedicated branch for every change. Never commit directly to `main`.
 
-We welcome you to use the GitHub issue tracker to report bugs or suggest features.
+Use a `type/short-description` format, where `type` describes the kind of work
+and the description is a few lowercase words separated by hyphens.
 
-When filing an issue, please check existing open, or recently closed, issues to make sure somebody else hasn't already
-reported the issue. Please try to include as much information as you can. Details like these are incredibly useful:
+- `feature/` — new functionality
+- `fix/` — bug fixes
+- `docs/` — documentation-only changes
+- `chore/` — tooling, dependencies, and maintenance
+- `refactor/` — code changes that neither fix a bug nor add a feature
 
-* A reproducible test case or series of steps
-* The version of our code being used
-* Any modifications you've made relevant to the bug
-* Anything unusual about your environment or deployment
+Examples:
 
+```text
+feature/label-sync-workflow
+fix/issue-template-validation
+docs/update-security-policy
+chore/bump-dependencies
+```
 
-## Contributing via Pull Requests
-Contributions via pull requests are much appreciated. Before sending us a pull request, please ensure that:
+When a branch relates to an issue, include the issue number for traceability,
+for example `fix/142-broken-funding-url`.
 
-1. You are working against the latest source on the *main* branch.
-2. You check existing open, and recently merged, pull requests to make sure someone else hasn't addressed the problem already.
-3. You open an issue to discuss any significant work - we would hate for your time to be wasted.
+## Commit Messages
 
-To send us a pull request, please:
+We follow the [Conventional Commits](https://www.conventionalcommits.org/)
+specification. A commit message has this structure:
 
-1. Fork the repository.
-2. Modify the source; please focus on the specific change you are contributing. If you also reformat all the code, it will be hard for us to focus on your change.
-3. Ensure local tests pass.
-4. Commit to your fork using clear commit messages.
-5. Send us a pull request, answering any default questions in the pull request interface.
-6. Pay attention to any automated CI failures reported in the pull request, and stay involved in the conversation.
+```text
+<type>(<optional scope>): <description>
 
-GitHub provides additional document on [forking a repository](https://help.github.com/articles/fork-a-repo/) and
-[creating a pull request](https://help.github.com/articles/creating-a-pull-request/).
+<optional body>
 
+<optional footer>
+```
 
-## Finding contributions to work on
-Looking at the existing issues is a great way to find something to contribute on. As our projects, by default, use the default GitHub issue labels (enhancement/bug/duplicate/help wanted/invalid/question/wontfix), looking at any 'help wanted' issues is a great place to start.
+Common types:
 
+- `feat` — a new feature
+- `fix` — a bug fix
+- `docs` — documentation only
+- `refactor` — a code change that neither fixes a bug nor adds a feature
+- `test` — adding or correcting tests
+- `chore` — build process, tooling, or dependency changes
 
-## Code of Conduct
-This project has adopted the [Amazon Open Source Code of Conduct](https://aws.github.io/code-of-conduct).
-For more information see the [Code of Conduct FAQ](https://aws.github.io/code-of-conduct-faq) or contact
-opensource-codeofconduct@amazon.com with any additional questions or comments.
+Guidelines:
 
+- Write the description in the imperative mood ("add", not "added" or "adds").
+- Keep the subject line at 72 characters or fewer and do not end it with a period.
+- Use the body to explain **what** changed and **why**, not how.
+- Reference related issues in the footer, for example `Closes #142`.
+- Mark breaking changes with a `!` after the type or a `BREAKING CHANGE:`
+  footer, for example `feat!: drop support for legacy config`.
 
-## Licensing
+Examples:
 
-See the LICENSE file for our project's licensing. We will ask you to confirm the licensing of your contribution.
+```text
+feat(labels): add alias-based rename support
+
+fix(templates): reject issue forms missing a description
+
+docs: clarify branch naming conventions
+
+chore(deps): bump @octokit/rest to 21.0.0
+```
+
+## Pull Requests
+
+Before opening a pull request, make sure that:
+
+1. Your work is based on the latest `main` branch.
+2. The change is focused on a single concern. Keep unrelated reformatting
+   out of it.
+3. Tests and linters pass locally.
+4. Documentation is updated to reflect any behavior changes.
+
+When you open the pull request:
+
+- Fill out the pull request template completely, including the description,
+  testing notes, and review checklist.
+- Give it a clear title that follows the Conventional Commits format and
+  matches the primary change.
+- Link the issues it addresses so they close automatically on merge.
+- Keep the pull request as small as is reasonable; smaller changes are reviewed
+  and merged faster.
+
+What to expect during review:
+
+- At least one approving review is required before a pull request can be merged
+  into `main`.
+- Address review feedback by pushing new commits to the same branch. Avoid
+  force-pushing once review has started so reviewers can follow your updates.
+- All automated checks must pass before merge.
+- A maintainer merges approved pull requests. We generally squash merge so that
+  each change lands as a single, well-described commit on `main`.
+
+## Questions
+
+If you get stuck or need direction, see [SUPPORT.md](./SUPPORT.md) for the best
+way to reach us. For security issues, follow [SECURITY.md](./SECURITY.md)
+instead of opening a public issue.

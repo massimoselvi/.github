@@ -1,0 +1,60 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+labels:
+  - bug
+  - triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report
+        Thanks for taking the time to report a bug. Please fill out the fields below so we can reproduce and resolve the issue quickly.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of the bug and the behavior you observed.
+      placeholder: Describe what happened and what you expected to happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is the impact of this bug?
+      options:
+        - Critical
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The version where you encountered the bug.
+      placeholder: "e.g., 1.2.3"
+    validations:
+      required: false
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: The operating system, browser, or runtime where the bug occurred.
+      placeholder: "e.g., macOS 14.5, Chrome 126, Node 20.11"
+    validations:
+      required: false
