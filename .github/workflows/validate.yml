@@ -25,7 +25,9 @@ jobs:
           persist-credentials: false
 
       - name: Parse YAML
-        run: ruby -ryaml -e 'Dir[".github/**/*.yml"].each { |f| YAML.load_file(f); puts "ok #{f}" }'
+        # Block scalar: in a plain scalar, " #" would start a YAML comment.
+        run: |
+          ruby -ryaml -e 'Dir[".github/**/*.yml"].each { |f| YAML.load_file(f); puts "ok #{f}" }'
 
       - name: Check the label catalog and the issue form labels
         run: |
