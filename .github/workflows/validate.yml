@@ -1,0 +1,49 @@
+name: Validate
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: validate-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Parse YAML
+        run: ruby -ryaml -e 'Dir[".github/**/*.yml"].each { |f| YAML.load_file(f); puts "ok #{f}" }'
+
+      - name: Check the label catalog and the issue form labels
+        run: |
+          ruby -ryaml -e '
+            labels = YAML.load_file(".github/labels.yml")
+            keys = labels.flat_map { |l| [l["name"]] + (l["aliases"] || []) }.map(&:downcase)
+            abort "Duplicate label name or alias" unless keys.uniq == keys
+            labels.each do |l|
+              abort "Bad color: #{l["name"]}" unless l["color"].to_s.match?(/\A\h{6}\z/)
+              abort "Description too long: #{l["name"]}" if l["description"].to_s.size > 100
+              abort "Too many aliases: #{l["name"]}" if (l["aliases"] || []).size > 10
+            end
+            names = labels.map { |l| l["name"] }
+            Dir[".github/ISSUE_TEMPLATE/*.yml"].each do |f|
+              form = YAML.load_file(f)
+              next unless form["body"]
+              missing = (form["labels"] || []) - names
+              abort "#{f} uses labels that are not in the catalog: #{missing.join(", ")}" unless missing.empty?
+            end
+            puts "#{labels.size} labels ok"
+          '

@@ -1,0 +1,49 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+
+# A new push cancels the review of the previous commit, so each PR pays for one
+# review of its latest commit.
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  claude-review:
+    # Reviews every push to a ready PR. This repository has one owner and the
+    # baseline requires 0 approvals, so no human approval covers later commits.
+    # Skipped (and passed, if the check is required):
+    # - Dependabot: its runs get no repository secrets, and the action rejects bot actors.
+    # - Fork PRs: they get no repository secrets, so the action would fail.
+    # - Draft PRs: the review runs when the PR is ready for review.
+    # A skipped job means "not reviewed", not "passed review".
+    if: >-
+      github.actor != 'dependabot[bot]' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Run Claude Code Review
+        id: claude-review
+        uses: anthropics/claude-code-action@cc98b3ae241b0fcfb6a42a2690751afffecb4452 # v1.0.278
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
+          plugins: 'code-review@claude-code-plugins'
+          prompt: '/code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}'
+          claude_args: '--allowedTools "mcp__github_inline_comment__create_inline_comment"'
