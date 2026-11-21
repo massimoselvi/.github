@@ -10,7 +10,8 @@ This document defines what `massimoselvi/.github` contains and what it does not 
 
 | Area | Status for a personal account | Decision |
 | --- | --- | --- |
-| Default community health files | Supported | In scope |
+| Default community health files, including `ACCESSIBILITY.md` | Supported | In scope |
+| `VULNERABILITY_REPORT.yml` | Supported | Out of scope for now. Add it to require fields in private vulnerability reports |
 | Issue forms and chooser configuration | Supported | In scope |
 | Pull request template | Supported | In scope |
 | Discussion category forms | Supported | Out of scope until a repository enables Discussions |
@@ -21,22 +22,24 @@ This document defines what `massimoselvi/.github` contains and what it does not 
 | `workflow-templates/` | Organization accounts only | Not added |
 | Organization default labels | Organization accounts only | Not added |
 | Shared CI | Reusable workflows in a public repository | Out of scope here. Do not use workflow templates |
-| Branch protection, rulesets, code owners in private repositories | GitHub Pro | Documented in [security-baseline.md](security-baseline.md) |
+| Branch protection, rulesets, required reviews, code owners | Available in public and private repositories, because the account has GitHub Pro. Repository-local, not inherited | Documented in [security-baseline.md](security-baseline.md) |
 
 Organization work belongs in the public `Cell-V/.github` repository. Do not add organization profile content, organization workflow templates, organization targets, or organization credentials here.
 
 ## How GitHub applies the defaults
 
-- GitHub uses a default file only when the target repository has no file with the same name in its root, `.github/`, or `docs/` folder.
+- GitHub uses a default file only when the target repository has no file with the same name in its `.github/`, root, or `docs/` folder. GitHub reads these folders in that order.
 - If a repository has any file in its own `.github/ISSUE_TEMPLATE/` folder, GitHub ignores the whole default `ISSUE_TEMPLATE/` folder, including `config.yml`.
 - Default files do not appear in the file tree or the clone of the target repository. They appear only in the GitHub user interface: the issue chooser, the pull request form, and the community profile.
 - Relative links in a default file resolve against `massimoselvi/.github`. Contact links in `config.yml` must be absolute URLs.
+- A label that an issue form sets must exist in `massimoselvi/.github` and in the target repository. Otherwise GitHub does not apply it.
 - GitHub does not inherit `CODEOWNERS`, `.gitignore`, `LICENSE`, `README.md`, workflows, labels, or repository settings.
 
 ## Repository layout
 
 | Path | Role | Inherited |
 | --- | --- | --- |
+| `ACCESSIBILITY.md` | Accessibility goals, known barriers, and reporting | Yes |
 | `CODE_OF_CONDUCT.md` | Contributor Covenant 2.1 | Yes |
 | `CONTRIBUTING.md` | Contribution and review rules | Yes |
 | `SECURITY.md` | Private vulnerability reporting policy | Yes |
@@ -62,7 +65,7 @@ State before this change, and the decision for each item.
 | `SECURITY.md` | Linked to a domain and an email address that do not exist | Rewritten for GitHub private vulnerability reporting |
 | `CONTRIBUTING.md` | Generic boilerplate with the same broken links | Rewritten |
 | `CODEOWNERS` | Pointed to a team of another account, which is not valid in a personal repository | Set to `@massimoselvi` |
-| `SUPPORT.md`, issue forms | Missing | Added |
+| `SUPPORT.md`, `ACCESSIBILITY.md`, issue forms | Missing | Added |
 | Labels | Only the GitHub defaults | Personal catalog added |
 | Pull request #1 | Organization scope. Closed without merge | Not reused as completed work. Issue form ideas adapted |
 

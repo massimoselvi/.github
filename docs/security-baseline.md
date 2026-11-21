@@ -1,23 +1,36 @@
 # Personal security baseline
 
-This baseline applies to repositories owned by the personal account `massimoselvi`. The `.github` repository cannot enforce settings. Apply each setting in the account or in each repository. Check each item against the current GitHub documentation before you rely on it, because plan limits change.
+This baseline applies to repositories owned by the personal account `massimoselvi`. The account has GitHub Pro and one owner, who is also the only regular contributor.
 
-## Plan matrix
+The `.github` repository cannot enforce settings. Rulesets, branch protection, code owners, and security features are repository-local. Apply each setting in the account or in each repository. `CODEOWNERS` is not inherited from this repository.
 
-| Control | Public repository, Free | Private repository, Free | Private repository, Pro |
+Check each item against the current GitHub documentation before you rely on it, because plan limits change.
+
+## What GitHub Pro gives this account
+
+| Control | Public repository | Private repository on Pro | Private repository on Free, for reference |
 | --- | --- | --- | --- |
-| Branch protection rules and rulesets | Yes | No | Yes |
-| Required pull request reviews | Yes | No | Yes |
-| Required review from code owners | Yes | No | Yes |
-| Required status checks | Yes | No | Yes |
-| Draft pull requests | Yes | No | Yes |
+| Rulesets and protected branches | Yes | Yes | No |
+| Required pull request reviews | Yes | Yes | No |
+| Code owners | Yes | Yes | No |
+| Required status checks | Yes | Yes | No |
+| Wikis and repository insights | Yes | Yes | No |
 | Dependabot alerts, security updates, version updates | Yes | Yes | Yes |
 | Dependency graph | Yes, on by default | Yes, enable it | Yes, enable it |
 | Secret scanning and push protection | Yes | No | No |
 | Code scanning with CodeQL | Yes | No | No |
 | Private vulnerability reporting | Yes | Not applicable | Not applicable |
 
-Secret scanning and code scanning for private repositories need GitHub Secret Protection and GitHub Code Security. GitHub sells them to organizations on Team or Enterprise, not to personal accounts. For private personal repositories, run a secret scanner (for example Gitleaks) in CI and as a pre-commit hook.
+GitHub Pro does not add secret scanning or code scanning to private repositories. GitHub sells GitHub Secret Protection and GitHub Code Security to organizations, not to personal accounts. For private repositories, run a secret scanner (for example Gitleaks) in CI and as a pre-commit hook. Confirm this on the GitHub pricing page if your plan changes.
+
+## Solo-owner rules
+
+The owner cannot approve their own pull request. A ruleset that requires one approval blocks every merge in a repository with one contributor. The baseline uses these rules:
+
+- **Pull requests with status checks are the gate.** Every change goes through a pull request, and CI must pass. Required approvals stay at `0`.
+- **Self-review is mandatory.** Read the diff of the pull request on GitHub before you merge it. For changes to infrastructure, authentication, or CI, review the diff with the review rules in [CONTRIBUTING.md](../CONTRIBUTING.md).
+- **No bypass in normal work.** The ruleset has no bypass actors. If an emergency needs a direct push, turn off the ruleset, push, turn on the ruleset again, and record the reason in the commit message.
+- **Collaborators change the rules.** When a repository gets a collaborator with write access, set the required approvals to `1` and require review from code owners. The collaborator then reviews the owner, and the owner reviews the collaborator.
 
 ## Account settings
 
@@ -32,25 +45,31 @@ Apply once, in **Settings** of the personal account.
 
 ## Repository settings
 
-Apply to each repository. Items marked **Public or Pro** need a public repository or GitHub Pro.
+Apply to each repository that you maintain, public or private.
 
-### Default branch ruleset (Public or Pro)
+### Default branch ruleset
 
-Create a ruleset that targets the default branch:
+Create a ruleset named `default-branch` that targets the default branch, with status **Active** and no bypass actors:
 
-- [ ] Require a pull request before merging.
-- [ ] Require the status checks of the CI workflow to pass.
-- [ ] Block force pushes.
 - [ ] Restrict deletions.
+- [ ] Block force pushes.
 - [ ] Require linear history.
 - [ ] Require signed commits.
+- [ ] Require a pull request before merging, with required approvals `0`. Turn on **Dismiss stale pull request approvals when new commits are pushed** and **Require conversation resolution before merging**.
+- [ ] Require the status checks of the CI workflow to pass, and require the branch to be up to date before merging.
 
-A solo maintainer cannot approve their own pull request. Set the required approvals to `0` while you are the only contributor, so that the rule does not block every merge. When a repository has collaborators, set the required approvals to `1`, require review from code owners, and add **Repository admin** to the bypass list only for emergencies.
+Repositories without CI: keep the pull request rule, and add CI before you add status checks.
+
+### Merge settings
+
+- [ ] Allow squash merging only. Use the pull request title as the default commit message.
+- [ ] Turn on **Automatically delete head branches**.
 
 ### Code security
 
 - [ ] Dependabot alerts and Dependabot security updates are on.
 - [ ] A `.github/dependabot.yml` file sets weekly version updates for each package ecosystem and for `github-actions`.
+- [ ] Private repositories: the dependency graph is on, and CI runs a secret scanner.
 - [ ] Public repositories: secret scanning and push protection are on.
 - [ ] Public repositories: CodeQL default setup is on for each supported language.
 - [ ] Public repositories: private vulnerability reporting is on. `SECURITY.md` depends on it.
@@ -59,7 +78,7 @@ A solo maintainer cannot approve their own pull request. Set the required approv
 
 - [ ] **Workflow permissions** is set to read repository contents. Each workflow declares the extra `permissions` it needs at job level.
 - [ ] **Allow GitHub Actions to create and approve pull requests** is off, unless a workflow needs it.
-- [ ] Workflows from fork pull requests need approval before they run.
+- [ ] Public repositories: workflows from fork pull requests need approval before they run.
 - [ ] Third-party actions are pinned to a full commit SHA. Dependabot updates the pins.
 - [ ] Workflows do not use `pull_request_target` with a checkout of the pull request code.
 - [ ] Secrets are stored as repository or environment secrets, never in files. Deploys use OIDC to AWS, not long-lived access keys.
@@ -72,6 +91,6 @@ A solo maintainer cannot approve their own pull request. Set the required approv
 
 ## Review
 
-Review this baseline every six months, and when you change plan. Record the date of the last review here.
+Review this baseline every six months, when you change plan, and when a repository gets its first collaborator. Record the date of the last review here.
 
 Last review: 2026-11-21.

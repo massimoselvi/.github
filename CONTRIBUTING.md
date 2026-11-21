@@ -7,6 +7,7 @@ Thank you for your interest. These guidelines apply to every repository owned by
 - Read the [Code of Conduct](CODE_OF_CONDUCT.md). It applies to all issues, pull requests, and comments.
 - Report a security problem as [SECURITY.md](SECURITY.md) describes. Do not open a public issue.
 - For questions and help, read [SUPPORT.md](SUPPORT.md).
+- To report an accessibility barrier, read [ACCESSIBILITY.md](ACCESSIBILITY.md).
 - Search the open and closed issues before you open a new one.
 
 ## Issues

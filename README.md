@@ -8,6 +8,7 @@ GitHub applies a file from this repository to any repository of the account that
 
 | File | Applies to |
 | --- | --- |
+| [ACCESSIBILITY.md](ACCESSIBILITY.md) | Accessibility goals, known barriers, and reporting |
 | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community conduct |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Issues, pull requests, and review |
 | [SECURITY.md](SECURITY.md) | Vulnerability reporting |
@@ -28,7 +29,7 @@ Each repository needs its own `CODEOWNERS`, `LICENSE`, `.gitignore`, workflows, 
 ## Documentation
 
 - [docs/scope.md](docs/scope.md): scope, boundaries, layout, and audit.
-- [docs/security-baseline.md](docs/security-baseline.md): account and repository security settings for Free and Pro.
+- [docs/security-baseline.md](docs/security-baseline.md): account and repository security settings for a solo owner on GitHub Pro.
 - [docs/label-sync.md](docs/label-sync.md): label catalog, targets, and credentials.
 
 ## Verify after a change
@@ -38,3 +39,5 @@ Use a public repository of the account that has no own community files, for exam
 1. Open `https://github.com/massimoselvi/<repository>/issues/new/choose`. The three forms and the two contact links appear, and there is no blank issue option.
 2. Open a pull request form. The default template fills the description.
 3. Open `https://github.com/massimoselvi/<repository>/community`. Code of conduct, contributing, security policy, support, issue templates, and pull request template show as present.
+
+An issue form applies its labels only when the labels exist in the target repository. Until the label sync runs, create `triage` by hand in a repository where you need it.

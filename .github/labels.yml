@@ -47,6 +47,12 @@
   color: "ee0701"
   description: Security hardening or a non-sensitive security fix
 
+- name: accessibility
+  color: "1d76db"
+  description: Barrier for people who use assistive technology
+  aliases:
+    - a11y
+
 - name: ci
   color: "5319e7"
   description: Continuous integration and automation
