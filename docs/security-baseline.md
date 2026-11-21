@@ -71,7 +71,7 @@ Merge settings of the repository (they are not ruleset rules):
 - A `workflow_dispatch` run does not satisfy a required check. The workflow must run on `pull_request`.
 - Where the ruleset offers it, set **GitHub Actions** as the expected source of each check. This stops another app from reporting a check with the same name.
 
-In `massimoselvi/.github`, require `Validate`. Do not require `claude-review` while the Claude Code GitHub App is not installed, because the job fails on every run.
+In `massimoselvi/.github`, require `Validate` and `claude-review`. `claude-review` needs the Claude Code GitHub App and the `CLAUDE_CODE_OAUTH_TOKEN` secret. Without them, the job fails on every run. The job skips Dependabot, fork, and draft pull requests and reports success, so a green `claude-review` means "not blocked", not always "reviewed". Check for the review comment before you merge.
 
 ### Optional hardening: signed commits
 
