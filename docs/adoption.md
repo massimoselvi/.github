@@ -14,7 +14,7 @@ This document shows how each default from `massimoselvi/.github` reaches a perso
 | Pull request template | Inherited | None | Add an own `.github/pull_request_template.md` |
 | Issue forms and chooser | Inherited | Create the labels that the forms use, until the label sync runs | Add any file to `.github/ISSUE_TEMPLATE/`. This replaces the whole default set |
 | Labels | Not inherited | Label sync, when it is available | Remove the repository from `.github/label-sync-targets.yml` |
-| Security baseline | Not inherited | Apply [security-baseline.md](security-baseline.md) by hand | Record the exception in the repository README |
+| Security baseline | Not inherited | Apply [security-baseline.md](security-baseline.md) by hand | Record the exception in the ClickUp task, not in a public file |
 | `CODEOWNERS` | Not inherited | Add `* @massimoselvi` | Not applicable |
 | `LICENSE` | Not inherited. GitHub has no default license file | Add an own `LICENSE` | Not applicable |
 | `.github/dependabot.yml` | Not inherited | Add one per repository | Not applicable |

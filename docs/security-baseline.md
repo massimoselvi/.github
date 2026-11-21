@@ -53,7 +53,7 @@ Rules:
 - [ ] **Restrict deletions.**
 - [ ] **Block force pushes.**
 - [ ] **Require a pull request before merging**, with required approvals `0`. Do not require review from code owners. Do not require approval of the most recent reviewable push. Turn on **Require conversation resolution before merging**.
-- [ ] **Require status checks to pass**, with **Require branches to be up to date before merging**. Add the actual CI checks of the repository (see "Required checks").
+- [ ] **Require status checks to pass**, with **Require branches to be up to date before merging**. Add the actual CI checks of the repository (see "Required checks"). Repositories without CI: leave this rule off and keep the other rules. Add CI before you add the rule.
 - [ ] **Require linear history.**
 - [ ] Do not turn on **Restrict updates**. It blocks routine merges unless an actor can bypass it.
 
@@ -156,6 +156,15 @@ Dependabot alerts depend on the dependency graph. The dependency graph depends o
 - [ ] `CODEOWNERS` contains `* @massimoselvi`.
 - [ ] `.gitignore` excludes `.env*`, credentials, and build output.
 - [ ] Archive a repository when you stop maintaining it.
+
+## References
+
+- [Dependency graph supported package ecosystems](https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/dependency-graph-supported-package-ecosystems)
+- [Dependabot supported ecosystems and repositories](https://docs.github.com/en/code-security/dependabot/ecosystems-supported-by-dependabot/supported-ecosystems-and-repositories)
+- [Creating rulesets for a repository](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/creating-rulesets-for-a-repository)
+- [Available rules for rulesets](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
+- [Troubleshooting required status checks](https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks)
+- [GitHub plans](https://docs.github.com/en/get-started/learning-about-github/githubs-plans)
 
 ## Review
 
