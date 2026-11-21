@@ -1,0 +1,28 @@
+# Explicit targets for the personal label sync.
+#
+# Only public repositories owned by the personal account massimoselvi.
+# Never add organization repositories here: organization targets and
+# credentials live in Cell-V/.github.
+# Never add private repository names here: this repository is public.
+# Forks and archived repositories are excluded on purpose.
+#
+# Last reviewed: 2026-11-21 (gh repo list massimoselvi --visibility public --source --no-archived)
+owner: massimoselvi
+catalog: .github/labels.yml
+delete_unlisted: false
+repositories:
+  - .github
+  - massimoselvi
+  - massimoselvi.github.io
+  - aws-cdk-lambda-cron
+  - aws-lambda-golang-todo-app
+  - serverless-todo-api-go
+  - pnpm-monorepo-starter-kit
+  - lerna-monorepo-starter-kit
+  - seatlock
+  - django_official_tutorial
+  - so-elegant
+  - iView
+  - iView-first
+  - TravisCI-test
+  - vue-playground

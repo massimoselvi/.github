@@ -1,0 +1,62 @@
+name: Bug report
+description: Report a defect or behavior that is not as expected.
+title: "bug: "
+labels:
+  - bug
+  - triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for the report. Search the open and closed issues before you continue.
+        Do not report a security problem here. Follow the security policy of the repository.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened, and what did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Give the smallest set of steps, commands, or code that shows the problem.
+      placeholder: |
+        1. Run `...`
+        2. Open `...`
+        3. See the error
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error output
+      description: Paste the exact error text or logs. Remove secrets and personal data first.
+      render: shell
+    validations:
+      required: false
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: "v1.2.3 or a1b2c3d"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, runtime, and browser, where applicable.
+      placeholder: "macOS 26, Node.js 24, Chrome 142"
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmations
+      options:
+        - label: I searched the existing issues, and this is not a duplicate.
+          required: true
+        - label: I removed secrets and personal data from this report.
+          required: true

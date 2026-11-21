@@ -1,0 +1,98 @@
+# Personal label catalog for repositories owned by massimoselvi.
+#
+# Schema (shared with the organization label tooling, do not change it here):
+#   name        (required) canonical label name, unique case-insensitively
+#   color       (required) 6-character hex color without '#', always quoted
+#   description (required) short description, max 100 characters
+#   aliases     (optional) previous names to rename from, max 10 per label
+#
+# The sync creates, updates, and renames labels. It never deletes a label
+# unless the run explicitly opts in. See docs/label-sync.md.
+#
+# The GitHub default labels are kept with their default names, so existing
+# issues keep their labels. The issue forms use: bug, enhancement, question, triage.
+
+# --- Type ---------------------------------------------------------------------
+
+- name: bug
+  color: "d73a4a"
+  description: Something does not work as expected
+  aliases:
+    - defect
+
+- name: enhancement
+  color: "a2eeef"
+  description: New feature or change to existing behavior
+  aliases:
+    - feature
+    - feature-request
+
+- name: documentation
+  color: "0075ca"
+  description: Improvements or additions to documentation
+  aliases:
+    - docs
+
+- name: question
+  color: "d876e3"
+  description: Further information is requested
+
+- name: dependencies
+  color: "0366d6"
+  description: Change to project dependencies
+  aliases:
+    - deps
+
+- name: security
+  color: "ee0701"
+  description: Security hardening or a non-sensitive security fix
+
+- name: ci
+  color: "5319e7"
+  description: Continuous integration and automation
+
+- name: breaking-change
+  color: "b60205"
+  description: Introduces a backwards-incompatible change
+  aliases:
+    - breaking
+
+# --- Triage -------------------------------------------------------------------
+
+- name: triage
+  color: "ededed"
+  description: Needs a first review by the maintainer
+  aliases:
+    - needs-triage
+
+- name: needs-info
+  color: "e99695"
+  description: Waiting for more information from the reporter
+
+- name: blocked
+  color: "b60205"
+  description: Blocked by an external dependency
+
+# --- Resolution ---------------------------------------------------------------
+
+- name: duplicate
+  color: "cfd3d7"
+  description: This issue or pull request already exists
+
+- name: invalid
+  color: "e4e669"
+  description: This is not valid or not actionable
+
+- name: wontfix
+  color: "ffffff"
+  description: This will not be worked on
+
+# --- Contribution -------------------------------------------------------------
+
+- name: good first issue
+  color: "7057ff"
+  description: Good for newcomers
+
+- name: help wanted
+  color: "008672"
+  description: Extra attention is wanted

@@ -1,1 +1,3 @@
-*       @massimoselvi-design/massimoselvi-dev
+# Code owners for massimoselvi/.github only.
+# GitHub does not inherit CODEOWNERS from this repository. Each repository needs its own file.
+* @massimoselvi
