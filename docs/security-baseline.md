@@ -30,7 +30,7 @@ The owner cannot approve their own pull request. A ruleset that requires one app
 - **Pull requests with status checks are the gate.** Every change goes through a pull request, and CI must pass. Required approvals stay at `0`.
 - **Self-review is mandatory.** Read the diff of the pull request on GitHub before you merge it. For changes to infrastructure, authentication, or CI, review the diff with the review rules in [CONTRIBUTING.md](../CONTRIBUTING.md).
 - **No bypass in normal work.** The ruleset has no bypass actors. If an emergency needs a direct push, turn off the ruleset, push, turn on the ruleset again, and record the reason in the commit message.
-- **Collaborators change the rules.** When a repository gets a collaborator with write access, set the required approvals to `1` and require review from code owners. The collaborator then reviews the owner, and the owner reviews the collaborator.
+- **Collaborators change the rules.** When a repository gets a collaborator with write access, set the required approvals to `1`, require review from code owners, and turn on **Dismiss stale pull request approvals when new commits are pushed**. The collaborator then reviews the owner, and the owner reviews the collaborator.
 
 ## Account settings
 
@@ -55,7 +55,7 @@ Create a ruleset named `default-branch` that targets the default branch, with st
 - [ ] Block force pushes.
 - [ ] Require linear history.
 - [ ] Require signed commits.
-- [ ] Require a pull request before merging, with required approvals `0`. Turn on **Dismiss stale pull request approvals when new commits are pushed** and **Require conversation resolution before merging**.
+- [ ] Require a pull request before merging, with required approvals `0`. Turn on **Require conversation resolution before merging**.
 - [ ] Require the status checks of the CI workflow to pass, and require the branch to be up to date before merging.
 
 Repositories without CI: keep the pull request rule, and add CI before you add status checks.

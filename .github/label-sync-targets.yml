@@ -18,7 +18,7 @@ repositories:
   - aws-lambda-golang-todo-app
   - serverless-todo-api-go
   - pnpm-monorepo-starter-kit
-  - lerna-monorepo-starter-kit
+  - lerna-monorepo-starter-kit # remove when archived (Kiro task 2.2)
   - seatlock
   - django_official_tutorial
   - so-elegant
