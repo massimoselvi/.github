@@ -1,59 +1,42 @@
-# Contributing Guidelines
+# Contributing
 
-Thank you for your interest in contributing to our project. Whether it's a bug report, new feature, correction, or additional
-documentation, we greatly value feedback and contributions from our community.
+Thank you for your interest. These guidelines apply to every repository owned by [@massimoselvi](https://github.com/massimoselvi) that does not have its own `CONTRIBUTING.md`. A repository-specific file always takes precedence.
 
-Please read through this document before submitting any issues or pull requests to ensure we have all the necessary
-information to effectively respond to your bug report or contribution.
+## Before you start
 
+- Read the [Code of Conduct](CODE_OF_CONDUCT.md). It applies to all issues, pull requests, and comments.
+- Report a security problem as [SECURITY.md](SECURITY.md) describes. Do not open a public issue.
+- For questions and help, read [SUPPORT.md](SUPPORT.md).
+- To report an accessibility barrier, read [ACCESSIBILITY.md](ACCESSIBILITY.md).
+- Search the open and closed issues before you open a new one.
 
-## Security issue notifications
-If you discover a potential security issue in this project we ask that you notify MassimoSelvi Security via our [vulnerability reporting page](http://security.massimoselvi.com/security/vulnerability-reporting/). Please do **not** create a public GitHub issue.
+## Issues
 
+Use an issue form: **Bug report**, **Feature request**, or **Question**. Give enough detail to reproduce the problem or to understand the need. Write in English.
 
-## Reporting Bugs/Feature Requests
+For a large change, open an issue first and agree on the approach before you write code. This prevents work that the maintainer cannot accept.
 
-We welcome you to use the GitHub issue tracker to report bugs or suggest features.
+## Pull requests
 
-When filing an issue, please check existing open, or recently closed, issues to make sure somebody else hasn't already
-reported the issue. Please try to include as much information as you can. Details like these are incredibly useful:
+1. Fork the repository and create a short-lived branch from the default branch.
+2. Keep each pull request to one purpose. Small pull requests get faster reviews.
+3. Write commit messages and the pull request title in [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) format, for example `fix(api): handle empty payload`.
+4. Fill in the pull request template. Link the issue on the `Task:` line.
+5. Add or update tests, and run the checks of the repository locally.
+6. Make sure that CI passes, and reply to review comments.
 
-* A reproducible test case or series of steps
-* The version of our code being used
-* Any modifications you've made relevant to the bug
-* Anything unusual about your environment or deployment
+The maintainer reviews pull requests on a best-effort basis. The target is a first response within 5 business days.
 
+## Review
 
-## Contributing via Pull Requests
-Contributions via pull requests are much appreciated. Before sending us a pull request, please ensure that:
+Reviews focus on correctness, architecture, security, and performance. Linters and formatters handle style. Review findings use three tags:
 
-1. You are working against the latest source on the *main* branch.
-2. You check existing open, and recently merged, pull requests to make sure someone else hasn't addressed the problem already.
-3. You open an issue to discuss any significant work - we would hate for your time to be wasted.
-
-To send us a pull request, please:
-
-1. Fork the repository.
-2. Modify the source; please focus on the specific change you are contributing. If you also reformat all the code, it will be hard for us to focus on your change.
-3. Ensure local tests pass.
-4. Commit to your fork using clear commit messages.
-5. Send us a pull request, answering any default questions in the pull request interface.
-6. Pay attention to any automated CI failures reported in the pull request, and stay involved in the conversation.
-
-GitHub provides additional document on [forking a repository](https://help.github.com/articles/fork-a-repo/) and
-[creating a pull request](https://help.github.com/articles/creating-a-pull-request/).
-
-
-## Finding contributions to work on
-Looking at the existing issues is a great way to find something to contribute on. As our projects, by default, use the default GitHub issue labels (enhancement/bug/duplicate/help wanted/invalid/question/wontfix), looking at any 'help wanted' issues is a great place to start.
-
-
-## Code of Conduct
-This project has adopted the [MassimoSelvi Open Source Code of Conduct](https://massimoselvi.github.io/code-of-conduct).
-For more information see the [Code of Conduct FAQ](https://massimoselvi.github.io/code-of-conduct-faq) or contact
-opensource-codeofconduct@massimoselvi.com with any additional questions or comments.
-
+| Tag | Meaning | Blocks the merge |
+| --- | --- | --- |
+| 🔴 Blocker | A defect, security issue, or design problem that must be fixed | Yes |
+| 🟡 Suggestion | An improvement that is worth doing | No |
+| 🔵 Nitpick | A small, optional detail | No |
 
 ## Licensing
 
-See the LICENSE file for our project's licensing. We will ask you to confirm the licensing of your contribution.
+Your contribution is licensed under the license of the repository you contribute to. If a repository has no license file, ask in the issue before you contribute.

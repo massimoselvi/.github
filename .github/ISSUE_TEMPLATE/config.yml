@@ -1,0 +1,11 @@
+# Issue chooser configuration. GitHub applies it to every repository owned by
+# massimoselvi that has no own .github/ISSUE_TEMPLATE/ folder.
+# Contact links must be absolute URLs, so they point to the shared policies here.
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/massimoselvi/.github/blob/main/SECURITY.md
+    about: Do not open a public issue. Use "Report a vulnerability" on the Security tab of the repository.
+  - name: Get support
+    url: https://github.com/massimoselvi/.github/blob/main/SUPPORT.md
+    about: Read where to ask questions and what response to expect.
