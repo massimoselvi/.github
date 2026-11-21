@@ -1,0 +1,17 @@
+# Dependabot version updates for massimoselvi/.github.
+# This repository has no package manifests, only GitHub Actions workflows.
+# Not inherited: each repository needs its own dependabot.yml.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Europe/Rome
+    commit-message:
+      prefix: ci
+    groups:
+      github-actions:
+        patterns:
+          - "*"

@@ -29,6 +29,7 @@ Each repository needs its own `CODEOWNERS`, `LICENSE`, `.gitignore`, workflows, 
 ## Documentation
 
 - [docs/scope.md](docs/scope.md): scope, boundaries, layout, and audit.
+- [docs/adoption.md](docs/adoption.md): adoption matrix, per-repository actions, and sync with the organization repository.
 - [docs/security-baseline.md](docs/security-baseline.md): account and repository security settings for a solo owner on GitHub Pro.
 - [docs/label-sync.md](docs/label-sync.md): label catalog, targets, and credentials.
 

@@ -24,6 +24,8 @@ This document defines what `massimoselvi/.github` contains and what it does not 
 | Shared CI | Reusable workflows in a public repository | Out of scope here. Do not use workflow templates |
 | Branch protection, rulesets, required reviews, code owners | Available in public and private repositories, because the account has GitHub Pro. Repository-local, not inherited | Documented in [security-baseline.md](security-baseline.md) |
 
+The adoption matrix for each default, and the rules for content shared with the organization repository, are in [adoption.md](adoption.md).
+
 Organization work belongs in the public `Cell-V/.github` repository. Do not add organization profile content, organization workflow templates, organization targets, or organization credentials here.
 
 ## How GitHub applies the defaults
@@ -49,7 +51,9 @@ Organization work belongs in the public `Cell-V/.github` repository. Do not add 
 | `.github/labels.yml` | Personal label catalog | No |
 | `.github/label-sync-targets.yml` | Explicit personal sync targets | No |
 | `CODEOWNERS` | Code owners for this repository only | No |
-| `docs/` | Scope, security baseline, label sync | No |
+| `.github/dependabot.yml` | Weekly updates of the pinned GitHub Actions | No |
+| `.github/workflows/` | `Validate` and `claude-review` for this repository | No |
+| `docs/` | Scope, adoption, security baseline, label sync | No |
 | `.kiro/specs/` | Kiro specification of the wider profile work | No |
 
 ## Audit of 2026-11-21
