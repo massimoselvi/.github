@@ -42,7 +42,7 @@ Curate Massimo Selvi's GitHub profile through Markdown authoring, shell scripts 
     - Make the script executable (`chmod +x`)
     - _Requirements: 4.1, 4.2, 4.3_
 
-  - [ ]* 2.3 Write shell validation tests for metadata script
+  - [ ] 2.3 Write shell validation tests for metadata script
     - **Property 1: Topic tag count within bounds**
     - Verify each repo entry has between 2 and 6 topic tags
     - **Validates: Requirements 2.2**
@@ -75,7 +75,7 @@ Curate Massimo Selvi's GitHub profile through Markdown authoring, shell scripts 
     - Commit and push initial scaffold
     - _Requirements: 3.4, 3.6_
 
-  - [ ]* 4.5 Validate showcase README structural completeness
+  - [ ] 4.5 Validate showcase README structural completeness
     - **Property 2: Showcase README structural completeness**
     - Check each showcase README contains purpose statement, CI badge placeholder, and TOC
     - **Validates: Requirements 3.6**
