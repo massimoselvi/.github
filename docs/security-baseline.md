@@ -73,6 +73,8 @@ Merge settings of the repository (they are not ruleset rules):
 
 In `massimoselvi/.github`, require `Validate` and `claude-review`. `claude-review` needs the Claude Code GitHub App and the `CLAUDE_CODE_OAUTH_TOKEN` secret. Without them, the job fails on every run. The job skips Dependabot, fork, and draft pull requests and reports success, so a green `claude-review` means "not blocked", not always "reviewed". Check for the review comment before you merge.
 
+The action also skips, and the check also reports success, on a pull request that changes `.github/workflows/claude-code-review.yml`. The action runs only when its workflow file is identical to the version on the default branch. This protects against a pull request that edits the workflow to change what the review can do. The log shows "Workflow validation failed". Review these pull requests by hand, and confirm that the review runs on the next pull request after the merge.
+
 ### Optional hardening: signed commits
 
 **Require signed commits** is not part of the baseline. Turn it on only after these checks:
