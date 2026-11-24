@@ -3,6 +3,12 @@ name: Claude Code Review
 on:
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
+  # Other repositories call this workflow (see docs/adoption.md). The caller
+  # passes the secret and grants the job permissions below.
+  workflow_call:
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN:
+        required: true
 
 # A new push cancels the review of the previous commit, so each PR pays for one
 # review of its latest commit.
