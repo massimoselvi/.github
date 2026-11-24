@@ -52,7 +52,7 @@ Organization work belongs in the public `Cell-V/.github` repository. Do not add 
 | `.github/label-sync-targets.yml` | Explicit personal sync targets | No |
 | `CODEOWNERS` | Code owners for this repository only | No |
 | `.github/dependabot.yml` | Weekly updates of the pinned GitHub Actions | No |
-| `.github/workflows/` | `Validate` and `claude-review` for this repository | No |
+| `.github/workflows/` | `Validate` and `claude-review` for this repository. `claude-review` is also a reusable workflow for other repositories | Callable, see [adoption.md](adoption.md#claude-code-review) |
 | `docs/` | Scope, adoption, security baseline, label sync | No |
 | `.kiro/specs/` | Kiro specification of the wider profile work | No |
 

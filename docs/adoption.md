@@ -19,8 +19,49 @@ This document shows how each default from `massimoselvi/.github` reaches a perso
 | `LICENSE` | Not inherited. GitHub has no default license file | Add an own `LICENSE` | Not applicable |
 | `.github/dependabot.yml` | Not inherited | Add one per repository | Not applicable |
 | Workflows | Not inherited | Add them per repository, or call a reusable workflow | Not applicable |
+| Claude code review | Not inherited. A reusable workflow | Add a caller workflow, the secret, and the Claude GitHub App. See [Claude code review](#claude-code-review) | Add an own review workflow instead of the caller |
 
 An own file replaces the default completely. GitHub does not merge an own file with the default.
+
+## Claude code review
+
+`.github/workflows/claude-code-review.yml` is a reusable workflow. A repository calls it with this file, `.github/workflows/claude-code-review.yml`:
+
+```yaml
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+
+# A different group from the called workflow, so the two never wait for each other.
+concurrency:
+  group: claude-review-caller-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    uses: massimoselvi/.github/.github/workflows/claude-code-review.yml@main
+    # A called workflow cannot get more permissions than the caller grants.
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+```
+
+Each calling repository also needs:
+
+1. The `CLAUDE_CODE_OAUTH_TOKEN` repository secret. Create the token with `claude setup-token`. `secrets: inherit` is documented for organizations and enterprises, so pass the secret by name.
+2. The Claude Code GitHub App, installed on the repository.
+
+Rules:
+
+- The required check name in the calling repository is `review / claude-review`, with the job ID `review`. A different job ID changes the check name and breaks a required check.
+- `@main` applies each change of this workflow to every caller at once. To control updates, pin a commit SHA. Dependabot then updates the SHA only if the calling repository has a `github-actions` entry in `.github/dependabot.yml`.
+- The pull request that adds the caller is probably not reviewed: the action runs only when its workflow file matches the default branch (see [security-baseline.md](security-baseline.md)). This was verified in this repository only. Confirm the behavior on the first caller, and update this line.
 
 ## Shared content with the organization repository
 
