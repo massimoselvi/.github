@@ -59,9 +59,9 @@ Each calling repository also needs:
 
 Rules:
 
-- The required check name in the calling repository is `review / claude-review`.
-- `@main` applies each change of this workflow to every caller at once. To control updates, pin a commit SHA and let Dependabot update it.
-- The pull request that adds the caller is not reviewed. The action runs only when the workflow file matches the default branch (see [security-baseline.md](security-baseline.md)). Confirm that the review runs on the next pull request after the merge.
+- The required check name in the calling repository is `review / claude-review`, with the job ID `review`. A different job ID changes the check name and breaks a required check.
+- `@main` applies each change of this workflow to every caller at once. To control updates, pin a commit SHA. Dependabot then updates the SHA only if the calling repository has a `github-actions` entry in `.github/dependabot.yml`.
+- The pull request that adds the caller is probably not reviewed: the action runs only when its workflow file matches the default branch (see [security-baseline.md](security-baseline.md)). This was verified in this repository only. Confirm the behavior on the first caller, and update this line.
 
 ## Shared content with the organization repository
 
