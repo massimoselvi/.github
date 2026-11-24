@@ -61,7 +61,9 @@ Rules:
 
 - The required check name in the calling repository is `review / claude-review`, with the job ID `review`. A different job ID changes the check name and breaks a required check.
 - `@main` applies each change of this workflow to every caller at once. To control updates, pin a commit SHA. Dependabot then updates the SHA only if the calling repository has a `github-actions` entry in `.github/dependabot.yml`.
-- The pull request that adds the caller is probably not reviewed: the action runs only when its workflow file matches the default branch (see [security-baseline.md](security-baseline.md)). This was verified in this repository only. Confirm the behavior on the first caller, and update this line.
+- The pull request that adds the caller is not reviewed. The action compares the caller file with the default branch of the calling repository, and the caller is not there yet (see [security-baseline.md](security-baseline.md)). The check reports success, and the log shows "Workflow validation failed". Confirmed on `massimoselvi/PillCast#1` on 2026-11-24. Review that pull request by hand.
+- Not confirmed yet: whether a change to the reusable workflow in this repository also makes callers skip the review until they match. Check the first caller pull request after the next change to `.github/workflows/claude-code-review.yml`, and update this line.
+- The first run needs the Claude Code GitHub App on the calling repository. Without it, the job fails with "Claude Code is not installed on this repository".
 
 ## Shared content with the organization repository
 
